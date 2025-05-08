@@ -1,34 +1,7 @@
 from tkinter import *
+from prices import *
 
 #function part for billing system
-# Product prices constants
-PRICES = {
-    # Cosmetics prices
-    'bath_soap': 40,
-    'face_cream': 140,
-    'face_wash': 240,
-    'hair_spray': 340,
-    'hair_gel': 140,
-    'body_lotion': 260,
-    
-    # Grocery prices
-    'rice': 80,
-    'food_oil': 180,
-    'wheat': 60,
-    'sugar': 45,
-    'salt': 20,
-    'daal': 160,
-    
-    # Cold Drinks prices
-    'coca_cola': 60,
-    'pepsi': 60,
-    'fanta': 60,
-    'sprite': 60,
-    'limca': 60,
-    'mountain_dew': 60
-}
-
-
 
 def Total():
     #function to calculate total bill
@@ -62,16 +35,29 @@ def Total():
                          (Hair_Spray )*PRICES['hair_spray']+(Hair_Gel)*PRICES['hair_gel']+(Body_Lotion )*PRICES['body_lotion'])
         Total_CosmeticsEntry.delete(0,END)
         Total_CosmeticsEntry.insert(0,f'Rs { Total_Cosmetics} ' )
+        #calculating the total for cosmetics discount
+        Cosmetic_Discount=Total_Cosmetics*0.05
+        Total_CosmeticsEntry.delete(0,END)
+        Total_CosmeticsEntry.insert(0,f'RS { Cosmetic_Discount}')
         #calculating the total for grocery
         Total_Grocery=((Rice )*PRICES['rice']+(Food_Oil )*PRICES['food_oil']+(Wheat )*PRICES['wheat']+
                         (Sugar )*PRICES['sugar']+(Salt )*PRICES['salt']+(Daal )*PRICES['daal'])
         Total_GroceryEntry.delete(0,END)
         Total_GroceryEntry.insert(0,f' RS {Total_Grocery}')
+        #calculating the total for grocery discount
+        Grocery_Discount=Total_Grocery*0.05
+        Total_GroceryEntry.delete(0,END)
+        Total_GroceryEntry.insert(0,f'RS {Grocery_Discount}')
+        
         #calculating the total for cold drinks
         Total_Cold_Drinks=((Coca_Cola or 0)*PRICES['coca_cola']+(Pepsi or 0)*PRICES['pepsi']+(Fanta or 0)*PRICES['fanta']+
                            (Sprite or 0)*PRICES['sprite']+(Limca or 0)*PRICES['limca']+(Mountain_Dew or 0)*PRICES['mountain_dew'])
         Total_Cold_DrinksEntry.delete(0,END)
         Total_Cold_DrinksEntry.insert(0,f'RS  {Total_Cold_Drinks} ')
+        #calculating the total for cold drinks discount
+        Cold_Drinks_Discount=Total_Cold_Drinks*0.05
+        Total_Cold_DrinksEntry.delete(0,END)
+        Total_Cold_DrinksEntry.insert(0,f'RS {Cold_Drinks_Discount}')
 
       
     except ValueError:
@@ -83,7 +69,7 @@ def Total():
 root=Tk()
 root.title("Billing System")
 root.geometry("1300x850+310+130")
-root.iconbitmap("icon.ico")
+root.iconbitmap("gui_project\icon.ico")
 #header for the project
 header=Label(root,text="Retail Billing System",font=("times mew roman",30,"bold"),bg="gray20",fg="gold",bd=12,relief=GROOVE)
 
